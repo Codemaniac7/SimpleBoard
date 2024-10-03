@@ -1,39 +1,42 @@
 package com.example.simple_board.post.model;
 
-
+import com.example.simple_board.board.db.BoardEntity;
+import com.example.simple_board.reply.db.ReplyEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 @JsonNaming(value= PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostRequest {
+public class PostDTO {
+    private Long id;
 
-    private Long boardId = 1L;
+    private Long boardId;
 
-    @NotBlank
     private String userName;
 
-    @NotBlank
-    @Size(min=4, max=4)
     private String password;
 
-    @NotBlank
-    @Email
     private String email;
 
-    @NotBlank
+    private String status;
+
     private String title;
 
-    @NotBlank
     private String content;
+
+    private LocalDateTime postedAt;
 }
